@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/public/weather-icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Weather App</title>
+</head>
+
+<body class="bg-dark d-flex align-items-center justify-content-center mh-vh-100">
+  <div>
+    <div class="container position-relative p-2">
+      <!-- Start Main Part -->
+      <main>
+        <button id="search-btn-open" type="button" class="d-flex gap-3 align-items-center text-white fs-lg btn-none text-shadow">
+          <i class="fa-solid fa-location-dot text-white"></i>
+          <p id="city-name" class="text-white">Cairo</p>
+          <i class="fa-solid fa-angle-down text-white"></i>
+        </button>
+        <div class="text-center mb-2">
+          <img id="weather-icon" class="weather-icon" src="/assets/images/weather-icon.png" onerror="this.error=null;this.src='/assets/images/weather-icon.png'" alt="weather" />
+        </div>
+        <div
+          class="bg-light rounded bg-opacity-40 p-2 text-center text-shadow d-flex flex-direction-column justify-content-center align-items-center gap-3 border-white-1 mb-1">
+          <div>
+            <p id="date" class="fs-md text-white">-</p>
+            <p id="temp" class="fs-xxl text-white">-°</p>
+            <p id="state" class="fs-xl text-white">-</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center gap-3 fs-lg">
+            <i class="fa-solid fa-wind icon-width text-white"></i>
+            <p class="state-title-width text-white">Wind</p>
+            <p class="text-white">|</p>
+            <p id="wind-speed" class="value-title-width text-white">- M/s</p>
+          </div>
+          <div class="d-flex justify-content-center align-items-center gap-3 fs-lg">
+            <i class="fa-solid fa-droplet icon-width text-white"></i>
+            <p class="state-title-width text-white">Hum</p>
+            <p class="text-white">|</p>
+            <p id="humidity" class="value-title-width text-white">- %</p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-4">
+          <button id="random-btn" type="button" class="btn-white">Random Location <i class="fa-solid fa-angle-right"></i></button>
+        </div>
+      </main>
+      <!-- End Main Part -->
+      <!-- Start Search Part -->
+      <div class="back-drop-search"></div>
+      <div class="back-drop-loading">
+        <img src="/assets/images/loading.svg" />
+      </div>
+      <section class="search p-2">
+        <form id="search-form" class="search-form rounded-2 gap-2">
+          <button id="search-btn-close" class="btn-none" type="button">
+            <i class="fa-solid fa-arrow-left-long"></i>
+          </button>
+          <input id="search-inp" type="text" placeholder="Search by city name" />
+          <button hidden type="submit"></button>
+          <button class="btn-none" type="button">
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+        </form>
+        <div class="mt-2">
+          <p class="fs-md fw-bold mb-1">Recent search</p>
+          <ul id="locations" class="list-decoration-none">
+            
+          </ul>
+        </div>
+      </section>
+      <div id="alert" class="alert">
+        Error Happened
+      </div>
+      <!-- End Search Part -->
+
+    </div>
+  </div>
+  <li class="search-item o-0 pointer-none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path
+        d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
+    </svg>
+    <span>Example</span>
+  </li>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>

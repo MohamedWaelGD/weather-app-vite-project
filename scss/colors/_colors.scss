@@ -1,0 +1,53 @@
+@each $key, $val in $colors {
+    .text-#{$key} {
+        color: $val;
+    }
+
+    .bg-#{$key} {
+        background-color: rgba($color: $val, $alpha: var(--bg-opacity));
+    }
+}
+
+$border-thicknesses: (
+    "0": 0px,
+    "1": $base-border-thickness,
+    "2": $base-border-thickness * 2,
+    "3": $base-border-thickness * 4,
+    "4": $base-border-thickness * 6,
+    "5": $base-border-thickness * 8
+);
+$borders: (
+    "border": (
+        "prefix": "border",
+        "values": $border-thicknesses
+    ),
+    "border-left":  (
+        "prefix": "border-start",
+        "values": $border-thicknesses
+    ),
+    "border-right":  (
+        "prefix": "border-end",
+        "values": $border-thicknesses
+    ),
+    "border-top":  (
+        "prefix": "border-top",
+        "values": $border-thicknesses
+    ),
+    "border-bottom":  (
+        "prefix": "border-bottom",
+        "values": $border-thicknesses
+    )
+);
+
+@each $property, $map in $borders {
+    $prefix: map-get($map: $map, $key: "prefix");
+    $values: map-get($map: $map, $key: "values");
+
+    @each $border-key, $border-val in $values {
+        @each $color-key, $color-val in $colors {
+            .#{$prefix}-#{$color-key}-#{$border-key} {
+                #{$property}: $border-val solid $color-val;
+            }
+        }
+    }
+}

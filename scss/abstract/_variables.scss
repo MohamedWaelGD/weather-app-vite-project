@@ -1,0 +1,46 @@
+$primary: #48b3e8;
+$secondary: #444E72;
+$error: #ff5050;
+$success:#90ff50;
+$dark: rgba(33, 33, 33, 1);
+$light: rgba(215, 215, 215, 1);
+$black: black;
+$white: white;
+$gray: #808080;
+$bg-gradient: linear-gradient(180deg, rgba(71,187,225,1) 0%, rgba(74,153,250,1) 100%);
+$text-shadow: -1.854px 2.781px 0.927px rgba(0, 0, 0, 0.10);
+
+$colors: (
+    "primary": $primary,
+    "secondary": $secondary,
+    "error": $error,
+    "success": $success,
+    "dark": $dark,
+    "light": $light,
+    "black": $black,
+    "white": $white,
+    "gray": $gray
+);
+
+$base-padding: 0.75rem;
+$base-margin: 0.75rem;
+$base-gap: 5px;
+
+$base-lighten-percent: 10;
+$base-darken-percent: 10;
+
+$base-animation-speed: 300ms;
+
+$base-border-thickness: 1px;
+
+$base-border-radius: 8.543px;
+$base-border-radius-btn: 18.543px;
+
+$base-box-shadow: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.10));
+$base-inner-box-shadow: -5.563px 3.709px 3.709px 0px rgba(255, 255, 255, 0.25) inset, 1.854px -2.781px 5.563px 0px rgba(0, 0, 0, 0.25) inset, -3.709px 7.417px 46.357px 3.709px rgba(0, 0, 0, 0.10);
+
+$base-font-size: 1rem;
+$font-size-sm: $base-font-size * 0.75;
+$font-size-lg: $base-font-size * 1.25;
+$font-size-xl: $base-font-size * 2;
+$font-size-xxl: $base-font-size * 3;

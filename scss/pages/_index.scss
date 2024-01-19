@@ -1,0 +1,117 @@
+.container {
+    width: 383.837px;
+    border-radius: $base-border-radius;
+    background: $primary;
+    background: $bg-gradient;
+    overflow: hidden;
+}
+
+.weather-icon {
+    width: 200px;
+    height: 200px;
+    filter: drop-shadow(5px 5px 5px #222);
+}
+
+.icon-width {
+    width: 20px;
+}
+
+.state-title-width {
+    width: 60px;
+}
+
+.value-title-width {
+    width: 80px;
+}
+
+.search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: $white;
+    border-radius: 0 0 $base-border-radius * 4 $base-border-radius * 4;
+    transform: translateY(-100%);
+}
+
+.search-form {
+    padding: 14px;
+    box-shadow: $base-inner-box-shadow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        flex-grow: 1;
+        background: none;
+        outline: none;
+        border: none;
+        font-weight: 700;
+    }
+}
+
+ul {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-item {
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: $font-size-lg;
+    transition: background-color $base-animation-speed;
+    border-radius: $base-border-radius;
+    padding: .2rem .4rem;
+    cursor: pointer;
+
+    svg {
+        margin-right: 15px;
+        width: 15px;
+        height: 15px;
+        fill: $secondary;
+    }
+
+    &:hover {
+        background-color: lighten($color: $dark, $amount: 70);
+    }
+}
+
+@mixin blackFullscreen {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: $black, $alpha: 0.6);
+}
+
+.back-drop-search {
+    @include blackFullscreen;
+}
+
+.back-drop-loading {
+    @include blackFullscreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+.alert {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: $base-border-radius;
+    background-color: $error;
+    padding: $base-padding;
+    color: $white;
+    pointer-events: none;
+    opacity: 0;
+}
