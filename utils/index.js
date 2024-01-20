@@ -146,7 +146,6 @@ function searchWithLocalName(name) {
         alert.innerHTML = err;
         animateShowAlert();
     }).finally(()=>{
-        
         animateHideLoading()
     });
 }
@@ -155,5 +154,10 @@ function getRandomCity() {
     animateShowLoading();
     getRandomCityName().then(city => {
         searchWithLocalName(city);
+    }).catch(err => {
+        alert.innerHTML = err;
+        animateShowAlert();
+    }).finally(()=>{
+        animateHideLoading()
     });
 }
