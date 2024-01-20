@@ -20,8 +20,10 @@ const locationsContainer = document.getElementById('locations');
 const searchItem = document.getElementsByClassName('search-item')[0];
 const randomBtn = document.getElementById('random-btn');
 const microphoneBtn = document.getElementById('microphone');
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const recognition = new SpeechRecognition();
+const microphoneEnableIcon = document.getElementById('micro-enable');
+const microphoneDisableIcon = document.getElementById('micro-disable');
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new window.SpeechRecognition();
 let speech = false;
 
 (function () {
@@ -40,37 +42,14 @@ function setupButtons() {
     const hideAnimation = () => {
         searchInp.value = '';
         animateHideSearchBar();
+        stopRecognition();
+        speech = false;
     };
     searchCloseBtn.addEventListener('click', hideAnimation);
     backDropSearch.addEventListener('click', hideAnimation);
     randomBtn.addEventListener('click', getRandomCity);
     microphoneBtn.addEventListener('click', toggleTextToSpeech);
 }
-
-function setupSpeechRecognition() {
-    recognition.lang = 'en-US';
-    recognition.continuous = true;
-    recognition.interimResults = true;
-
-    recognition.onresult = e => {
-        const transcript = Array.from(e.results)
-            .map(result => result[0])
-            .map(result => result.transcript);
-
-        searchInp.innerHTML = transcript;
-        console.log(transcript);
-    };
-    recognition.onstart = () => {
-        console.log('Listening...');
-    };
-    recognition.onstop = () => {
-        console.log('Stopped...');
-    };
-    recognition.onerror = (event) => {
-        console.log('Error occurred: ' + event.error);
-    };
-}
-
 function getLocation() {
     checkPermissionAndGetCurrentLocation().then(res => {
         const location = res;
@@ -192,6 +171,43 @@ function getRandomCity() {
     });
 }
 
+function setupSpeechRecognition() {
+    recognition.lang = 'en-US';
+
+    recognition.onresult = e => {
+        const transcript = Array.from(e.results)
+            .map(result => result[0])
+            .map(result => result.transcript);
+
+        searchInp.value = transcript.join(' ').replace('.', '');
+    };
+    recognition.onstart = () => {
+        searchInp.value = '';
+        console.log('Listening...');
+        updateMicrophoneIcon();
+    };
+    recognition.onspeechend = () => {
+        stopRecognition();
+        updateMicrophoneIcon();
+        searchInp.focus();
+    };
+    recognition.onerror = (event) => {
+        speech = false;
+        updateMicrophoneIcon();
+        console.log('Error occurred: ' + event.error);
+    };
+}
+
+function stopRecognition() {
+    speech = false;
+    recognition.stop();
+    console.log('Stopped...');
+    if (searchInp.value) {
+        searchWithLocalName(searchInp.value);
+        searchInp.value = '';
+    }
+}
+
 function toggleTextToSpeech() {
     speech = !speech;
 
@@ -199,5 +215,15 @@ function toggleTextToSpeech() {
         recognition.start();
     } else {
         recognition.stop();
+    }
+}
+
+function updateMicrophoneIcon() {
+    if (speech) {
+        microphoneEnableIcon.classList.add('d-none');
+        microphoneDisableIcon.classList.remove('d-none');
+    } else {
+        microphoneEnableIcon.classList.remove('d-none');
+        microphoneDisableIcon.classList.add('d-none');
     }
 }
