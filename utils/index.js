@@ -19,12 +19,17 @@ const alert = document.getElementById('alert');
 const locationsContainer = document.getElementById('locations');
 const searchItem = document.getElementsByClassName('search-item')[0];
 const randomBtn = document.getElementById('random-btn');
+const microphoneBtn = document.getElementById('microphone');
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+let speech = false;
 
 (function () {
     setupButtons();
     getLocation();
     handleSearchForm();
     getSavedLocations();
+    setupSpeechRecognition();
 })();
 
 function setupButtons() {
@@ -39,6 +44,31 @@ function setupButtons() {
     searchCloseBtn.addEventListener('click', hideAnimation);
     backDropSearch.addEventListener('click', hideAnimation);
     randomBtn.addEventListener('click', getRandomCity);
+    microphoneBtn.addEventListener('click', toggleTextToSpeech);
+}
+
+function setupSpeechRecognition() {
+    recognition.lang = 'en-US';
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onresult = e => {
+        const transcript = Array.from(e.results)
+            .map(result => result[0])
+            .map(result => result.transcript);
+
+        searchInp.innerHTML = transcript;
+        console.log(transcript);
+    };
+    recognition.onstart = () => {
+        console.log('Listening...');
+    };
+    recognition.onstop = () => {
+        console.log('Stopped...');
+    };
+    recognition.onerror = (event) => {
+        console.log('Error occurred: ' + event.error);
+    };
 }
 
 function getLocation() {
@@ -160,4 +190,14 @@ function getRandomCity() {
     }).finally(()=>{
         animateHideLoading()
     });
+}
+
+function toggleTextToSpeech() {
+    speech = !speech;
+
+    if (speech == true) {
+        recognition.start();
+    } else {
+        recognition.stop();
+    }
 }

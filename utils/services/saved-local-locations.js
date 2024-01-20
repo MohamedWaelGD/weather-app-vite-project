@@ -10,7 +10,7 @@ export function addLocation(location) {
 }
 
 export function removeLocation(location) {
-    const locations = getLocations();
+    let locations = getLocations();
 
     locations = locations.filter(e => e !== location);
     localStorage.setItem(STORAGE, JSON.stringify(locations));
