@@ -8,6 +8,41 @@ const DELAY_TO_HIDE_ALERT = 1;
 let searchBarIsOpened = false;
 let isLoading = false;
 
+export function animateIntro() {
+    let tl = gsap.timeline();
+    tl.fromTo('#main', {
+        y: -1000,
+    }, {
+        y: 0,
+        duration: 1.6
+    });
+    tl.fromTo('#weather-icon', {
+        opacity: 0
+    }, {
+        opacity: 1,
+        duration: 1.5,
+    });
+    tl.fromTo('#content', {
+        scale: 0
+    }, {
+        scale: 1,
+        ease: "circ",
+        duration: 1.5
+    }, "-=1.5");
+    tl.fromTo('#button-container', {
+        y: 1000,
+    }, {
+        y: 0,
+        duration: 2
+    }, "-=2");
+    tl.fromTo('#search-btn-open', {
+        y: -1000,
+    }, {
+        y: 0,
+        duration: 2
+    }, "-=2");
+}
+
 export function animateShowSearchBar() {
     if (searchBarIsOpened) return;
     searchBarIsOpened = true;

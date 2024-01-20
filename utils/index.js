@@ -1,6 +1,6 @@
-import { animateShowSearchBar, animateHideSearchBar, animateShowLoading, animateHideLoading, animateShowAlert } from './animations/animations';
+import { animateShowSearchBar, animateHideSearchBar, animateShowLoading, animateHideLoading, animateShowAlert, animateIntro } from './animations/animations';
 import { checkPermissionAndGetCurrentLocation, getWeatherWithLatAndLong, getWeatherWithName } from './services/api/weather-service';
-import { addLocation, getLocations, removeLocation } from './services/saved-local-locations';
+import { addLocation, getLocations } from './services/saved-local-locations';
 import { getRandomCityName } from './services/api/geonames';
 
 const searchOpenBtn = document.getElementById('search-btn-open');
@@ -32,6 +32,7 @@ let speech = false;
     handleSearchForm();
     getSavedLocations();
     setupSpeechRecognition();
+    animateIntro();
 })();
 
 function setupButtons() {
