@@ -194,7 +194,11 @@ function setupSpeechRecognition() {
     recognition.onerror = (event) => {
         speech = false;
         updateMicrophoneIcon();
-        console.log('Error occurred: ' + event.error);
+        console.log('Error speech recognition: ' + event.error);
+        if (event.error === 'network') {
+            alert.innerHTML = 'Your browser not supporting speech recognition.';
+            animateShowAlert();
+        }
     };
 }
 
